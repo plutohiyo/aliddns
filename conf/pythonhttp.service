@@ -1,0 +1,11 @@
+[Unit]
+Description=Python http
+After=network.target
+
+[Service]
+User=root
+ExecStart=/usr/bin/python3 -m http.server --cgi 18888 --directory /tmp/pythonhttp
+ExecStop=/usr/bin/killall -w -s 9 python3
+
+[Install]
+WantedBy=multi-user.target
