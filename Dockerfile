@@ -2,7 +2,7 @@ FROM ubuntu:20.04
 
 MAINTAINER plutohiyo@gmail.com
 
-RUN buildDeps='systemd python3 python3-pip init' \
+RUN buildDeps='systemd python3 python3-pip init vim' \
     && apt-get update \
     && apt-get install -y $buildDeps \
     && apt-get autoremove -y \
