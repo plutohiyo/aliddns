@@ -64,6 +64,6 @@ else:
     print('<title>aliddns</title>')
     print('</head>')
     print('<body>')
-    print("<h2>%s : %s</h2>" % (type(dns_value), type(data2['DomainRecords']["Record"][0]["Value"])))
+    print("<h2>%s : %s</h2>" % (str(dns_value), str(data2['DomainRecords']["Record"][0]["Value"])))
     print('</body>')
     print('</html>')
