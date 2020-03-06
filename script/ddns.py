@@ -27,13 +27,12 @@ request.set_DomainName(dns_domain_name)
 request.set_RRKeyWord(dns_rr)
 response = client.do_action_with_exception(request)
 
-
 data2 = json.loads(str(response, encoding='utf-8'))
-print(dns_value)
-print(data2['DomainRecords']["Record"][0]["Value"])
 
-if ( str(data2['DomainRecords']["Record"][0]["Value"]) != str(dns_value) ):
-    dns_record_id = data2['DomainRecords']["Record"][0]["RecordId"]
+dns_record_id = data2['DomainRecords']["Record"][0]["RecordId"]
+old_value = data2['DomainRecords']["Record"][0]["Value"]
+
+if old_value != dns_value:
 
     request2 = UpdateDomainRecordRequest()
     request2.set_accept_format('json')
@@ -52,9 +51,9 @@ if ( str(data2['DomainRecords']["Record"][0]["Value"]) != str(dns_value) ):
     print('<title>aliddns</title>')
     print('</head>')
     print('<body>')
-    print('<h2>success</h2>')
+    print('<h2>success, old_ip is %s ,new ip is %s</h2>' % (old_value, dns_value))
     print('</body>')
-    print('</html>')
+    print('</html>')    
 else:
     print('Content-type:text/html')
     print('')
@@ -64,6 +63,6 @@ else:
     print('<title>aliddns</title>')
     print('</head>')
     print('<body>')
-    print("<h2>%s : %s</h2>" % (str(dns_value), str(data2['DomainRecords']["Record"][0]["Value"])))
+    print('<h2>need not update, old_ip is %s ,new ip is %s</h2>' % (old_value, dns_value))   
     print('</body>')
     print('</html>')
